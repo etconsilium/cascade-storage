@@ -1,5 +1,7 @@
 <?php namespace Storage;
 
+if (!defined('APP_ID')) define ('APP_ID', sha1_file (__FILE__));
+
 use Doctrine\Common\Cache\FilesystemCache;
 use Doctrine\Common\Cache\MemcacheCache;
 use Doctrine\Common\Cache\MemcachedCache;
@@ -10,7 +12,7 @@ use Doctrine\Common\Cache\XcacheCache;
 use Doctrine\Common\Cache\ZendDataCache;
 
 /**
- * Description of CacheSpooler
+ * Description of StorageSpooler
  *
  * @author vs
  */
@@ -19,20 +21,25 @@ class Spooler implements \Doctrine\Common\Cache\Cache{
     protected $_tmpdir;
     protected $_spool=[];
     protected $_priority=[];
-    protected $_mem_start;
-    protected $_mem_limit;
+    static protected $_default_priority=['save'=>50,'delete'=>50,'fetch'=>50,'precheck'=>false];
+
+    static protected $_mem_start=null;
+    static protected $_mem_limit;
 
     function __construct($cache_list=null, $default_temp=null) {
-        $this->_mem_start=memory_get_usage();
+        !self::$_mem_start && self::$_mem_start=memory_get_usage();
         $this->init($cache_list, $default_temp);
         return $this;
     }
 
     public function init($configs, $default_temp=null){
-        //  второй параметр злой хардкод
-        $this->_tmpdir = empty($default_temp) ? sys_get_temp_dir().DIRECTORY_SEPARATOR.APP_ID : $default_temp ;
+        $this->_tmpdir = empty($default_temp)
+            ? sys_get_temp_dir().DIRECTORY_SEPARATOR.APP_ID
+            : $default_temp ;
+        @mkdir($this->_tmpdir, 0755);
+
         foreach ($configs as $id=>$c) {
-            $prt=array_merge(['save'=>50,'delete'=>50,'fetch'=>50,'precheck'=>false],(!empty($c['priority'])?$c['priority']:[]));
+            $prt=array_merge(self::$_default_priority, (!empty($c['priority'])?$c['priority']:[]));
             $cache=$c['adapter'];
             switch (strtolower($cache['name'])) :
                 case 'apc':

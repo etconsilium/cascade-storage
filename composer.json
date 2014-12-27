@@ -1,11 +1,11 @@
 {
     "name": "etconsilium/cascade-storage"
-    ,"description": ""
-    ,"tags": ["php_for_food", "нужна работа"]
-    ,"keywords": []
+    ,"description": "hierarchical KV-storage"
+    ,"tags": ["php_for_food", "нужна работа", "cache", "doctrine"]
+    ,"keywords": ["KV-storage", "cache spooling"]
     ,"license": "BSDL"
     ,"copyright": "(cc-by-nc)"
-    ,"version": "1.0.1"
+    ,"version": "1.0.3"
     ,"require": {
         "php":">5.5",
         "doctrine/cache":"*",
