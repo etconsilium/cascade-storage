@@ -1,4 +1,4 @@
-<?php namespace Storage\Spooler;
+<?php namespace Storage;
 
 use Doctrine\Common\Cache\FilesystemCache;
 use Doctrine\Common\Cache\MemcacheCache;
