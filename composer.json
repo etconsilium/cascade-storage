@@ -1,0 +1,18 @@
+{
+    "name": "etconsilium/cascade-storage"
+    ,"description": ""
+    ,"tags": ["php_for_food", "нужна работа"]
+    ,"keywords": []
+    ,"license": "BSDL"
+    ,"copyright": "(cc-by-nc)"
+    ,"version": "1.0.1"
+    ,"require": {
+        "php":">5.5",
+        "doctrine/cache":"*",
+        "symfony/yaml":"*"
+    }
+    ,
+    "autoload": {
+        "psr-0": { "": "src/" }
+    }
+}
