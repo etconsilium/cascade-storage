@@ -1,13 +1,13 @@
 {
     "name": "etconsilium/cascade-storage"
-    ,"description": ""
+    ,"description": "KV storage files powered"
     ,"tags": ["php_for_food", "нужна работа"]
     ,"keywords": []
-    ,"license": "BSDL"
+    ,"license": "BSD-3-Clause"
     ,"copyright": "(cc-by-nc)"
     ,"version": "1.0.1"
     ,"require": {
-        "php":">5.5",
+        "php":">=5.5",
         "doctrine/cache":"*",
         "symfony/yaml":"*"
     }
